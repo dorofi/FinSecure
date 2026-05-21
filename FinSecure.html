@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinSecure — Ubezpieczenia i Finanse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #0f2040;
+      --navy-light: #162d52;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-pale: #f5e9c8;
+      --cream: #f8f5ef;
+      --text-dark: #0a1628;
+      --text-mid: #4a5568;
+      --text-light: #8a98aa;
+      --white: #ffffff;
+    }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+ 
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      background: rgba(10, 22, 40, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      transition: all 0.3s ease;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .nav-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta {
+      padding: 9px 24px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      border-radius: 4px;
+      color: var(--gold) !important;
+      font-weight: 500 !important;
+      transition: all 0.25s !important;
+    }
+    .nav-cta:hover {
+      background: var(--gold) !important;
+      color: var(--navy) !important;
+    }
+ 
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 70% 40%, rgba(201,168,76,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 20% 80%, rgba(22,45,82,0.8) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-decoration {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 520px;
+      height: 520px;
+      opacity: 0.07;
+    }
+    .hero-decoration circle {
+      fill: none;
+      stroke: var(--gold);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 100px;
+      font-size: 12px;
+      color: var(--gold-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 5vw, 72px);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-title strong {
+      font-weight: 600;
+      display: block;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 44px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      border: none;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(201,168,76,0.4);
+    }
+    .btn-outline {
+      padding: 14px 32px;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 12px;
+      padding: 28px 32px;
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(180deg, var(--gold), transparent);
+    }
+    .stat-card:hover {
+      border-color: rgba(201,168,76,0.3);
+      background: rgba(255,255,255,0.06);
+      transform: translateX(4px);
+    }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 6px;
+      letter-spacing: 0.04em;
+    }
+    .stat-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 4px;
+    }
+ 
+    /* TRUST STRIP */
+    .trust-strip {
+      background: var(--white);
+      border-top: 1px solid rgba(10,22,40,0.06);
+      border-bottom: 1px solid rgba(10,22,40,0.06);
+      padding: 24px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      overflow: hidden;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-light);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .trust-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+ 
+    /* SECTIONS COMMON */
+    section { overflow: hidden; }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+    .section-label {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 4vw, 56px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--navy);
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+ 
+    /* SERVICES */
+    .services {
+      padding: 120px 0;
+      background: var(--cream);
+    }
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+    .services-desc {
+      font-size: 16px;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(10,22,40,0.08);
+      border: 1px solid rgba(10,22,40,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .service-card {
+      background: var(--white);
+      padding: 44px 36px;
+      position: relative;
+      transition: all 0.35s ease;
+      cursor: default;
+    }
+    .service-card:hover {
+      background: var(--navy);
+      z-index: 1;
+    }
+    .service-card:hover .service-icon-wrap {
+      background: rgba(201,168,76,0.15);
+      border-color: rgba(201,168,76,0.3);
+    }
+    .service-card:hover .service-name,
+    .service-card:hover .service-desc {
+      color: rgba(255,255,255,0.9);
+    }
+    .service-card:hover .service-desc { color: rgba(255,255,255,0.55); }
+    .service-card:hover .service-num { color: rgba(201,168,76,0.25); }
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(10,22,40,0.06);
+      line-height: 1;
+      margin-bottom: 20px;
+      transition: color 0.35s;
+    }
+    .service-icon-wrap {
+      width: 52px; height: 52px;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      transition: all 0.35s;
+    }
+    .service-icon-wrap svg {
+      width: 24px; height: 24px;
+      color: var(--gold);
+    }
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+      transition: color 0.35s;
+    }
+    .service-desc {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      transition: color 0.35s;
+    }
+    .service-arrow {
+      margin-top: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 500;
+    }
+ 
+    /* WHY US */
+    .whyus {
+      padding: 120px 0;
+      background: var(--navy);
+      position: relative;
+    }
+    .whyus::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 50%;
+      height: 100%;
+      background: radial-gradient(ellipse 60% 60% at 100% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    }
+    .whyus-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .whyus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 72px;
+    }
+    .whyus-visual {
+      position: relative;
+    }
+    .whyus-card-main {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 16px;
+      padding: 40px;
+      backdrop-filter: blur(8px);
+    }
+    .whyus-card-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 100px;
+      font-size: 11px;
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .whyus-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .whyus-progress-item {
+      margin-bottom: 20px;
+    }
+    .whyus-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+    }
+    .whyus-progress-label span:last-child {
+      color: var(--gold-light);
+    }
+    .whyus-progress-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .whyus-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px;
+      transform-origin: left;
+      animation: growBar 1.5s ease forwards;
+    }
+    @keyframes growBar {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    .whyus-float {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: 12px;
+      padding: 20px 28px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .whyus-float-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .whyus-float-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+    .whyus-features {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .whyus-feature {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .whyus-feature-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .whyus-feature-icon svg {
+      width: 20px; height: 20px;
+      color: var(--gold);
+    }
+    .whyus-feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .whyus-feature-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+    }
+ 
+    /* PROCESS */
+    .process {
+      padding: 120px 0;
+      background: var(--cream);
+    }
+    .process-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 40px; left: 12.5%;
+      width: 75%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold), transparent);
+      opacity: 0.3;
+    }
+    .process-step {
+      text-align: center;
+      padding: 0 24px;
+      position: relative;
+    }
+    .process-step-num {
+      width: 80px; height: 80px;
+      background: var(--white);
+      border: 2px solid rgba(201,168,76,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--gold);
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s;
+    }
+    .process-step:hover .process-step-num {
+      background: var(--navy);
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+    .process-step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .process-step-desc {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+ 
+    /* TESTIMONIALS */
+    .testimonials {
+      padding: 120px 0;
+      background: var(--white);
+    }
+    .testimonials-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 64px;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--cream);
+      border: 1px solid rgba(10,22,40,0.07);
+      border-radius: 16px;
+      padding: 44px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .testimonial-card:hover {
+      border-color: rgba(201,168,76,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(10,22,40,0.08);
+    }
+    .testimonial-card.featured {
+      background: var(--navy);
+    }
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 300;
+      color: var(--text-dark);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      font-style: italic;
+    }
+    .testimonial-card.featured .testimonial-quote {
+      color: rgba(255,255,255,0.9);
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .testimonial-avatar {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--navy);
+    }
+    .testimonial-card.featured .testimonial-name {
+      color: var(--white);
+    }
+    .testimonial-role {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+    .testimonial-card.featured .testimonial-role {
+      color: rgba(255,255,255,0.45);
+    }
+    .testimonial-stars {
+      position: absolute;
+      top: 44px; right: 44px;
+      display: flex;
+      gap: 3px;
+    }
+    .star {
+      width: 14px; height: 14px;
+      fill: var(--gold);
+      color: var(--gold);
+    }
+    .testimonials-side {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+ 
+    /* CONTACT */
+    .contact {
+      padding: 120px 0;
+      background: var(--navy);
+      position: relative;
+    }
+    .contact::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 80% at 0% 50%, rgba(201,168,76,0.05) 0%, transparent 60%);
+    }
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .contact-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+    .contact-title em { font-style: italic; color: var(--gold-light); }
+    .contact-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      margin-bottom: 44px;
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .contact-info-icon {
+      width: 40px; height: 40px;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-info-icon svg {
+      width: 18px; height: 18px;
+      color: var(--gold);
+    }
+    .contact-info-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .contact-info-val {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+    }
+    .contact-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 16px;
+      padding: 44px;
+      backdrop-filter: blur(8px);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 13px 16px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.25s;
+      appearance: none;
+    }
+    .form-input::placeholder { color: rgba(255,255,255,0.25); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.07);
+    }
+    .form-select { color: rgba(255,255,255,0.7); }
+    .form-select option { background: var(--navy-mid); color: white; }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 4px;
+    }
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(201,168,76,0.35);
+    }
+ 
+    /* FOOTER */
+    footer {
+      background: #060e1c;
+      padding: 64px 5% 32px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 32px;
+    }
+    .footer-brand-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 280px;
+    }
+    .footer-col-title {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.2);
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; }
+ 
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+ 
+    /* HAMBURGER (mobile) */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--gold); margin: 5px 0;
+      transition: all 0.3s;
+    }
+ 
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: row; flex-wrap: wrap; }
+      .stat-card { flex: 1; min-width: 150px; }
+      .services-header { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .whyus-grid { grid-template-columns: 1fr; }
+      .whyus-float { position: relative; bottom: auto; right: auto; margin-top: 24px; display: inline-block; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonials-side { flex-direction: row; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .trust-strip { flex-wrap: wrap; gap: 20px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+
+</style>
+</head>
+<body>
+
+<!-- Mobile nav overlay and menu -->
+<div class="mobile-nav-bg" id="mobileNavBg"></div>
+<div class="mobile-nav" id="mobileNav">
+  <ul class="nav-links">
+    <li><a href="#uslugi">Usługi</a></li>
+    <li><a href="#dlaczego-my">O Nas</a></li>
+    <li><a href="#proces">Jak działamy</a></li>
+    <li><a href="#kontakt" class="nav-cta">Bezpłatna konsultacja</a></li>
+  </ul>
+</div>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-mark"></span>
+    <span class="nav-logo-text">FinSecure</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#uslugi">Usługi</a></li>
+    <li><a href="#dlaczego-my">O Nas</a></li>
+    <li><a href="#proces">Jak działamy</a></li>
+    <li><a href="#kontakt" class="nav-cta">Bezpłatna konsultacja</a></li>
+  </ul>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <svg class="hero-decoration" viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="260" cy="260" r="240" stroke-width="1"/>
+    <circle cx="260" cy="260" r="180" stroke-width="0.5"/>
+    <circle cx="260" cy="260" r="120" stroke-width="1"/>
+    <circle cx="260" cy="260" r="60" stroke-width="0.5"/>
+    <line x1="260" y1="20" x2="260" y2="500" stroke="var(--gold)" stroke-width="0.5"/>
+    <line x1="20" y1="260" x2="500" y2="260" stroke="var(--gold)" stroke-width="0.5"/>
+    <line x1="90" y1="90" x2="430" y2="430" stroke="var(--gold)" stroke-width="0.3"/>
+    <line x1="430" y1="90" x2="90" y2="430" stroke="var(--gold)" stroke-width="0.3"/>
+  </svg>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">Zaufany Partner od 2009 roku</div>
+      <h1 class="hero-title">
+        Twoje <em>bezpieczeństwo</em><br>
+        <strong>na pierwszym miejscu</strong>
+      </h1>
+      <p class="hero-desc">Profesjonalne doradztwo ubezpieczeniowe i finansowe dla osób prywatnych oraz firm. Pomagamy wybrać najlepsze rozwiązania dopasowane do Twoich potrzeb i budżetu.</p>
+      <div class="hero-buttons">
+        <a href="#kontakt" class="btn-primary">Umów bezpłatną konsultację</a>
+        <a href="#uslugi" class="btn-outline">Nasze usługi →</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Lat doświadczenia</div>
+        <div class="stat-sub">na rynku ubezpieczeń</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2400</div>
+        <div class="stat-label">Zadowolonych klientów</div>
+        <div class="stat-sub">w całej Polsce</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Towarzystw ubezpieczeniowych</div>
+        <div class="stat-sub">w naszym portfolio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item">
+    <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+    </svg>
+    Licencjonowany Broker KNF
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+    </svg>
+    Ocena 4.9/5 — Google Reviews
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+    </svg>
+    RODO & bezpieczeństwo danych
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    Odpowiedź w ciągu 24h
+  </div>
+  <div class="trust-item">
+    <svg class="trust-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 6.75z" />
+    </svg>
+    Bezpłatna infolinia
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="uslugi">
+  <div class="section-inner">
+    <div class="services-header fade-up">
+      <div>
+        <div class="section-label">— Co oferujemy</div>
+        <h2 class="section-title">Kompleksowe<br>usługi <em>finansowe</em></h2>
+      </div>
+      <p class="services-desc">Oferujemy pełen zakres usług ubezpieczeniowych i finansowych. Nasz zespół ekspertów dobierze dla Ciebie najlepsze rozwiązanie spośród ofert ponad 30 towarzystw ubezpieczeniowych.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-num">01</div>
+        <div class="service-icon-wrap">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+          </svg>
+        </div>
+        <div class="service-name">Ubezpieczenia Komunikacyjne</div>
+        <p class="service-desc">OC, AC, NNW, assistance — znajdziemy najtańsze i najlepsze ubezpieczenie dla Twojego pojazdu. Porównujemy oferty 30+ towarzystw w kilka minut.</p>
+        <div class="service-arrow">Dowiedz się więcej →</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">02</div>
+        <div class="service-icon-wrap">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+          </svg>
+        </div>
+        <div class="service-name">Ubezpieczenia Majątkowe</div>
+        <p class="service-desc">Dom, mieszkanie, mienie firmowe — kompleksowa ochrona Twojego majątku. Ubezpieczenia od ognia, powodzi, kradzieży i wielu innych zdarzeń.</p>
+        <div class="service-arrow">Dowiedz się więcej →</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">03</div>
+        <div class="service-icon-wrap">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+          </svg>
+        </div>
+        <div class="service-name">Ubezpieczenia na Życie</div>
+        <p class="service-desc">Zadbaj o bezpieczeństwo finansowe swojej rodziny. Ubezpieczenia na życie, chorobowe, od następstw nieszczęśliwych wypadków.</p>
+        <div class="service-arrow">Dowiedz się więcej →</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">04</div>
+        <div class="service-icon-wrap">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
+          </svg>
+        </div>
+        <div class="service-name">Ubezpieczenia Firmowe</div>
+        <p class="service-desc">OC działalności, majątek firmy, flota pojazdów, ubezpieczenia pracownicze — kompleksowa obsługa ubezpieczeniowa Twojego biznesu.</p>
+        <div class="service-arrow">Dowiedz się więcej →</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">05</div>
+        <div class="service-icon-wrap">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+          </svg>
+        </div>
+        <div class="service-name">Ubezpieczenia Turystyczne</div>
+        <p class="service-desc">Wyjedź spokojnie — ubezpieczenia podróżne z kosztami leczenia, NNW, assistance i ochroną bagażu. Dla turystów i osób pracujących za granicą.</p>
+        <div class="service-arrow">Dowiedz się więcej →</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">06</div>
+        <div class="service-icon-wrap">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+          </svg>
+        </div>
+        <div class="service-name">Doradztwo Finansowe</div>
+        <p class="service-desc">Kredyty hipoteczne, leasing, fundusze inwestycyjne, plany oszczędnościowe — pomagamy zbudować solidne fundamenty finansowe na przyszłość.</p>
+        <div class="service-arrow">Dowiedz się więcej →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="whyus" id="dlaczego-my">
+  <div class="section-inner whyus-inner">
+    <div class="section-label" style="color:var(--gold)">— Dlaczego my</div>
+    <h2 class="section-title" style="color:var(--white)">Twój partner w świecie <em>ubezpieczeń</em></h2>
+    <div class="whyus-grid">
+      <div class="whyus-visual fade-up">
+        <div class="whyus-card-main">
+          <div class="whyus-card-badge">Porównanie ofert</div>
+          <div class="whyus-card-title">Najlepsza cena na rynku</div>
+          <div class="whyus-progress-item">
+            <div class="whyus-progress-label"><span>Oszczędność na OC samochodu</span><span>do 40%</span></div>
+            <div class="whyus-progress-bar"><div class="whyus-progress-fill" style="width:80%"></div></div>
+          </div>
+          <div class="whyus-progress-item">
+            <div class="whyus-progress-label"><span>Ubezpieczenia majątkowe</span><span>do 30%</span></div>
+            <div class="whyus-progress-bar"><div class="whyus-progress-fill" style="width:65%"></div></div>
+          </div>
+          <div class="whyus-progress-item">
+            <div class="whyus-progress-label"><span>Ubezpieczenia firmowe</span><span>do 35%</span></div>
+            <div class="whyus-progress-bar"><div class="whyus-progress-fill" style="width:72%"></div></div>
+          </div>
+        </div>
+        <div class="whyus-float">
+          <div class="whyus-float-num">98%</div>
+          <div class="whyus-float-label">Zadowolenia klientów</div>
+        </div>
+      </div>
+      <div class="whyus-features fade-up">
+        <div class="whyus-feature">
+          <div class="whyus-feature-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+          </div>
+          <div>
+            <div class="whyus-feature-title">Niezależny broker KNF</div>
+            <p class="whyus-feature-desc">Jesteśmy niezależni — nie jesteśmy powiązani z żadnym towarzystwem. Pracujemy wyłącznie w Twoim interesie, wybierając najlepsze dostępne oferty.</p>
+          </div>
+        </div>
+        <div class="whyus-feature">
+          <div class="whyus-feature-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"/></svg>
+          </div>
+          <div>
+            <div class="whyus-feature-title">Obsługa szkód bez stresu</div>
+            <p class="whyus-feature-desc">W przypadku szkody jesteśmy po Twojej stronie. Pomagamy w całym procesie likwidacji, negocjujemy z towarzystwem i walczymy o należne Ci odszkodowanie.</p>
+          </div>
+        </div>
+        <div class="whyus-feature">
+          <div class="whyus-feature-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <div class="whyus-feature-title">Wznowienia i monitoring polis</div>
+            <p class="whyus-feature-desc">Przypominamy o wygasających polisach i regularnie weryfikujemy Twoje ubezpieczenia, aby Twoja ochrona była zawsze aktualna i optymalna cenowo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="proces">
+  <div class="section-inner">
+    <div class="process-header fade-up">
+      <div class="section-label">— Jak działamy</div>
+      <h2 class="section-title">Prosto, szybko, <em>bezpiecznie</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="process-step-num">01</div>
+        <div class="process-step-title">Konsultacja</div>
+        <p class="process-step-desc">Bezpłatna rozmowa z doradcą — online, telefonicznie lub osobiście. Analizujemy Twoje potrzeby i oczekiwania.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-step-num">02</div>
+        <div class="process-step-title">Analiza i oferty</div>
+        <p class="process-step-desc">Przeszukujemy oferty ponad 30 towarzystw i przygotowujemy zestawienie najlepszych opcji dostosowanych do Twojej sytuacji.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-step-num">03</div>
+        <div class="process-step-title">Wybór i zawarcie</div>
+        <p class="process-step-desc">Wyjaśniamy szczegóły każdej oferty i pomagamy podjąć najlepszą decyzję. Formalności załatwiamy szybko i bezpiecznie.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-step-num">04</div>
+        <div class="process-step-title">Stała opieka</div>
+        <p class="process-step-desc">Jesteśmy z Tobą na każdym etapie — monitoring polis, obsługa szkód, doradzamy przy każdej zmianie sytuacji życiowej.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="testimonials-header fade-up">
+      <div>
+        <div class="section-label">— Opinie klientów</div>
+        <h2 class="section-title">Co mówią o nas<br><em>nasi klienci</em></h2>
+      </div>
+      <a href="#kontakt" class="btn-primary" style="height:fit-content">Dołącz do nich →</a>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card featured fade-up">
+        <div class="testimonial-stars">
+          <svg class="star" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="testimonial-quote">"Dzięki FinSecure zaoszczędziłem ponad 800 zł na ubezpieczeniu auta i domu. Doradca przeanalizował moje aktualne polisy i zaproponował lepsze opcje w kilku towarzystwach. Szczerze polecam każdemu, kto nie ma czasu samodzielnie porównywać ofert."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MK</div>
+          <div>
+            <div class="testimonial-name">Marek Kowalski</div>
+            <div class="testimonial-role">Właściciel firmy budowlanej, Wrocław</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonials-side">
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-stars">
+            <svg class="star" viewBox="0 0 20 20" style="fill:var(--gold)"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="star" viewBox="0 0 20 20" style="fill:var(--gold)"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="star" viewBox="0 0 20 20" style="fill:var(--gold)"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="star" viewBox="0 0 20 20" style="fill:var(--gold)"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="star" viewBox="0 0 20 20" style="fill:var(--gold)"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="testimonial-quote">"Profesjonalna obsługa przy szkodzie komunikacyjnej. Doradca walczył o wyższe odszkodowanie i wygrał. Następnym razem trafiłem od razu tutaj."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;font-size:16px">AN</div>
+            <div>
+              <div class="testimonial-name">Anna Nowak</div>
+              <div class="testimonial-role">Lekarz, Kraków</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-up">
+          <p class="testimonial-quote">"Ubezpieczenie firmowe dla mojej firmy z 15 pracownikami — wszystko szybko, w dobrej cenie i z pełnym wyjaśnieniem każdego punktu polisy."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#11998e,#38ef7d);color:white;font-size:16px">TW</div>
+            <div>
+              <div class="testimonial-name">Tomasz Wiśniewski</div>
+              <div class="testimonial-role">CEO, Agencja IT, Warszawa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="kontakt">
+  <div class="section-inner contact-inner">
+    <div class="contact-grid">
+      <div class="fade-up">
+        <div class="section-label" style="color:var(--gold)">— Skontaktuj się z nami</div>
+        <h2 class="contact-title">Zróbmy to razem —<br><em>bezpłatna</em> konsultacja</h2>
+        <p class="contact-desc">Napisz lub zadzwoń — nasz doradca skontaktuje się z Tobą w ciągu 24 godzin i zaproponuje najlepsze rozwiązanie dopasowane do Twoich potrzeb.</p>
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 6.75z"/></svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Telefon</div>
+              <div class="contact-info-val">+48 500 123 456</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            </div>
+            <div>
+              <div class="contact-info-label">E-mail</div>
+              <div class="contact-info-val">kontakt@finsecure.pl</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Biuro</div>
+              <div class="contact-info-val">ul. Świdnicka 12, Wrocław</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form fade-up">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Imię i nazwisko</label>
+            <input type="text" class="form-input" placeholder="Jan Kowalski">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefon</label>
+            <input type="tel" class="form-input" placeholder="+48 000 000 000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" placeholder="jan@firma.pl">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Rodzaj ubezpieczenia</label>
+          <select class="form-select">
+            <option value="">Wybierz kategorię...</option>
+            <option>Ubezpieczenie komunikacyjne (OC/AC)</option>
+            <option>Ubezpieczenie majątkowe (dom/mieszkanie)</option>
+            <option>Ubezpieczenie na życie</option>
+            <option>Ubezpieczenie firmowe</option>
+            <option>Ubezpieczenie turystyczne</option>
+            <option>Doradztwo finansowe</option>
+            <option>Inne</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Wiadomość (opcjonalnie)</label>
+          <textarea class="form-textarea form-input" placeholder="Opisz krótko czego potrzebujesz..."></textarea>
+        </div>
+        <button class="form-submit" onclick="handleSubmit(this)">Wyślij zapytanie — bezpłatnie</button>
+        <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:14px;line-height:1.6">Wysyłając formularz zgadzasz się na przetwarzanie danych osobowych zgodnie z Polityką Prywatności. Twoje dane nie będą udostępniane podmiotom trzecim.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="nav-logo" style="margin-bottom:4px">
+          <div class="nav-logo-mark">F</div>
+          <span class="nav-logo-text">Fin<span>Secure</span></span>
+        </div>
+        <p class="footer-brand-text">Licencjonowany broker ubezpieczeniowy działający na polskim rynku od 2009 roku. Pomagamy ponad 2400 klientom w całej Polsce.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Usługi</div>
+        <ul class="footer-links">
+          <li><a href="#">Ubezpieczenia komunikacyjne</a></li>
+          <li><a href="#">Ubezpieczenia majątkowe</a></li>
+          <li><a href="#">Ubezpieczenia na życie</a></li>
+          <li><a href="#">Ubezpieczenia firmowe</a></li>
+          <li><a href="#">Ubezpieczenia turystyczne</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Firma</div>
+        <ul class="footer-links">
+          <li><a href="#">O nas</a></li>
+          <li><a href="#">Nasz zespół</a></li>
+          <li><a href="#">Kariera</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Informacje</div>
+        <ul class="footer-links">
+          <li><a href="#">Polityka prywatności</a></li>
+          <li><a href="#">Regulamin</a></li>
+          <li><a href="#">Polityka cookies</a></li>
+          <li><a href="#">RODO</a></li>
+          <li><a href="#">KNF</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 FinSecure sp. z o.o. — Wszelkie prawa zastrzeżone.</span>
+      <span>Numer licencji KNF: <a href="#">BR/000123/2009</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 40) {
+      nav.style.background = 'rgba(16,25,42,0.98)';
+    } else {
+      nav.style.background = 'rgba(16,25,42,0.92)';
+    }
+  });
+
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      e.preventDefault();
+      document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Закрыть мобильное меню при переходе
+      if (window.innerWidth < 900) closeMobileNav();
+    });
+  });
+
+  // Form submit
+  function handleSubmit(btn) {
+    btn.textContent = '✓ Wysłano! Skontaktujemy się wkrótce.';
+    btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+    btn.disabled = true;
+  }
+
+  // Mobile nav logic
+  const hamburger = document.querySelector('.hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileNavBg = document.getElementById('mobileNavBg');
+  hamburger.addEventListener('click', openMobileNav);
+  mobileNavBg.addEventListener('click', closeMobileNav);
+
+  function openMobileNav() {
+    mobileNav.classList.add('open');
+    mobileNavBg.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    mobileNavBg.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>
